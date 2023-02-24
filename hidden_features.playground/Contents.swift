@@ -11,10 +11,10 @@ case "programmer", "datas cientist":
     description += "data scientist"
     fallthrough
 default:
-    description += " an also a computer entusiast"
+    description += " and also a computer entusiast"
 }
 print(description)
-// Prints "My skills are: programmer, developer, data scientist an also a computer entusiast\"
+// Prints "My skills are: programmer, developer, data scientist and also a computer entusiast\"
 
 // Functions with touple
 
