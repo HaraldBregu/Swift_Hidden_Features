@@ -296,10 +296,16 @@ case .satelites(_): break
 
 | Features                          | Struct | Classes |
 | :-------------------------------- |:------:| :-----: |
-| Define properties to store values | True   |  True   |
-|  | &#9744;| &#9745; |
-|  | | |
-|  | | |
+|   Define properties to store values | &check;   |  &check;   |
+|   Define methods to provide functionality | &check;   |  &check;   |
+|   Define subscripts to provide access to their values using subscript syntax  | &check;   |  &check;   |
+|   Define initializers to set up their initial state   | &check;   |  &check;   |
+|   Be extended to expand their functionality beyond a default implementation   | &check;   |  &check;   |
+|   Conform to protocols to provide standard functionality of a certain kind    | &check;   |  &check;   |
+|   Inheritance enables one class to inherit the characteristics of another |&cross;|&check;|
+|   Type casting enables you to check and interpret the type of a class instance at runtime |&cross;|&check;|
+|   Deinitializers enable an instance of a class to free up any resources it has assigned   |&cross;|&check;|
+|   Reference counting allows more than one reference to a class instance  |&cross;|&check;|
  
 ```swift
 ```
