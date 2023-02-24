@@ -135,12 +135,11 @@ struct Car {
 }
 
 var myBMWCar = Car()
-print(myBMWCar.speed) // Prints "0"
 print(myBMWCar.$speed) // Prints "is off"
  
 myBMWCar.speed = 40
-print(myBMWCar.speed) // Prints "100"
-print(myBMWCar.$speed) // Prints "is very fast"
+print(myBMWCar.speed) // Prints "40"
+print(myBMWCar.$speed) // Prints "Is on urban limits speed"
 
 myBMWCar.speed = 100
 print(myBMWCar.speed) // Prints "100"
