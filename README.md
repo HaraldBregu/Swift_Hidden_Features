@@ -307,8 +307,90 @@ case .satelites(_): break
 |   Deinitializers enable an instance of a class to free up any resources it has assigned   |&cross;|&check;|
 |   Reference counting allows more than one reference to a class instance  |&cross;|&check;|
  
-```swift
-```
+ ### Properties
+ 
+ There are 5 type of properties
+ 
+ * Stored Properties
+ * Lazy Stored Properties
+ * Computed Properties
+ * Read-Only Computed Properties
+ * Property Observers
+ * Property Wrappers
+ 
+ Property Wrappers
 
 ```swift
+@propertyWrapper
+struct SpeedLimit {
+    private var number: Int
+    private var maximum: Int
+    private(set) var projectedValue: String
+    var wrappedValue: Int {
+        get { return number }
+        set {
+            if newValue < 50 && newValue >= 20 {
+                number = newValue
+                projectedValue = "Is on urban limits speed"
+            } else if newValue < 20 {
+                projectedValue = "Is very slow"
+                number = newValue
+            }  else if newValue > maximum {
+                projectedValue = "Is faster than max limit"
+                number = min(newValue, maximum)
+            } else {
+                projectedValue = "Is very fast"
+                number = newValue
+            }
+        }
+    }
+    
+    init() {
+        projectedValue = "Is off"
+        number = 40
+        maximum = 300
+    }
+}
+
+struct Car {
+    @SpeedLimit var speed: Int
+}
+
+var myBMWCar = Car()
+print(myBMWCar.speed) // Prints "0"
+print(myBMWCar.$speed) // Prints "is off"
+ 
+myBMWCar.speed = 40
+print(myBMWCar.speed) // Prints "100"
+print(myBMWCar.$speed) // Prints "is very fast"
+
+myBMWCar.speed = 100
+print(myBMWCar.speed) // Prints "100"
+print(myBMWCar.$speed) // Prints "is very fast"
+
+myBMWCar.speed = 454
+print(myBMWCar.speed) // Prints "300"
+print(myBMWCar.$speed) // Prints "Is faster than max limit"
+```
+
+Subscript Syntax
+
+```swift
+struct CarPower {
+    let powerkw: Double
+    subscript(index: Double) -> Double {
+        return powerkw * index
+    }
+}
+let carPower = CarPower(powerkw: 80)
+print("CarPower in horsepower is: \(carPower[1.35962])")
+
+enum Planet: Int {
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+    static subscript(n: Int) -> Planet {
+        return Planet(rawValue: n)!
+    }
+}
+
+print(Planet[4])
 ```

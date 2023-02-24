@@ -96,3 +96,76 @@ case .planets(_): break
 case .star(_): break
 case .satelites(_): break
 }
+
+// Property Wrappers
+
+@propertyWrapper
+struct SpeedLimit {
+    private var number: Int
+    private var maximum: Int
+    private(set) var projectedValue: String
+    var wrappedValue: Int {
+        get { return number }
+        set {
+            if newValue < 50 && newValue >= 20 {
+                number = newValue
+                projectedValue = "Is on urban limits speed"
+            } else if newValue < 20 {
+                projectedValue = "Is very slow"
+                number = newValue
+            }  else if newValue > maximum {
+                projectedValue = "Is faster than max limit"
+                number = min(newValue, maximum)
+            } else {
+                projectedValue = "Is very fast"
+                number = newValue
+            }
+        }
+    }
+    
+    init() {
+        projectedValue = "Is off"
+        number = 40
+        maximum = 300
+    }
+}
+
+struct Car {
+    @SpeedLimit var speed: Int
+}
+
+var myBMWCar = Car()
+print(myBMWCar.speed) // Prints "0"
+print(myBMWCar.$speed) // Prints "is off"
+ 
+myBMWCar.speed = 40
+print(myBMWCar.speed) // Prints "100"
+print(myBMWCar.$speed) // Prints "is very fast"
+
+myBMWCar.speed = 100
+print(myBMWCar.speed) // Prints "100"
+print(myBMWCar.$speed) // Prints "is very fast"
+
+myBMWCar.speed = 454
+print(myBMWCar.speed) // Prints "300"
+print(myBMWCar.$speed) // Prints "Is faster than max limit"
+
+// Subscript Syntax
+
+struct CarPower {
+    let powerkw: Double
+    subscript(index: Double) -> Double {
+        return powerkw * index
+    }
+}
+let carPower = CarPower(powerkw: 80)
+print("CarPower in horsepower is: \(carPower[1.35962])")
+
+enum Planet: Int {
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+    static subscript(n: Int) -> Planet {
+        return Planet(rawValue: n)!
+    }
+}
+
+print(Planet[4])
