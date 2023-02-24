@@ -292,6 +292,13 @@ case .satelites(_): break
 }
 ```
 
+### Structures and Classes
+
+| Features              | Struct | Classes |
+| :---------------- | :------: | ----: |
+| Define properties to store values        |   True   | True |
+|  |      |  |
+ 
 ```swift
 ```
 
