@@ -17,4 +17,3 @@ simpleArray
 // Remove duplicated items in an array with Set
 var arrayWithDouplicatedItems = ["Apple", "Banana", "Kiwi", "Apple", nil]
 var rem = Set(arrayWithDouplicatedItems)
-
